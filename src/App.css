@@ -1,0 +1,35 @@
+/* @import 'antd/dist/antd.css'; */
+/* App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.welcome-text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sign-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sign-buttons button.active {
+  background-color: #1890ff;
+  color: white;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style adjustments for SignIn and SignUp components can be added here */

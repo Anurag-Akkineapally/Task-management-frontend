@@ -1,0 +1,34 @@
+.tasklist {
+  margin: 24px;
+  padding: 24px;
+  background: #fff;
+  background-color: white;
+}
+.tab-spacing .ant-tabs-tab {
+  margin-right: 70px; /* Consistent spacing between tabs */
+  margin-left: 20px; /* Consistent spacing for adjacent tabs */
+}
+
+.ant-tabs-tab + .ant-tabs-tab {
+  margin-left: 20px; /* Ensures uniform spacing between adjacent tabs */
+}
+
+/* Increase gap between specific tabs */
+.tab-spacing .ant-tabs-tab:nth-child(2) {
+  margin-right: 50px; /* Increase gap between "Active" and "Completed" */
+}
+.tab-spacing .ant-tabs-tab:nth-child(1) {
+  margin-right: 50px; /* Increase gap between "Active" and "Completed" */
+}
+
+.ant-tabs-tab:hover {
+  color: #1890ff; /* Default hover color for Ant Design tabs */
+}
+/* Custom spacing between action buttons */
+.toggle-status {
+  margin-right: 30px; /* Adjust the horizontal gap between Toggle and Edit/Delete */
+}
+
+.edit-button {
+  margin-right: 30px; /* Adjust the horizontal gap between Edit and Delete */
+}
