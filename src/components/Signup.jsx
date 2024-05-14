@@ -1,7 +1,8 @@
 // components/Signup.js
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./Signup.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import { message } from "antd";
 
 function Signup() {
@@ -10,6 +11,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [signedUp, setSignedUp] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to track password visibility
 
   const handleSignup = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -27,7 +29,7 @@ function Signup() {
       if (response.ok) {
         setSignedUp(true);
         message.info(
-          "Hurrah!Signup is successfull and your account is created"
+          "Hurrah! Signup is successful and your account is created"
         );
       } else if (response.status === 409) {
         setError("User already exists");
@@ -45,6 +47,10 @@ function Signup() {
     }, 1);
     return <Redirect to="/" />;
   }
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="signup-page">
@@ -75,14 +81,28 @@ function Signup() {
           </div>
           <div className="input-group">
             <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              {/* Toggle password visibility button */}
+              {showPassword ? (
+                <FaEyeSlash
+                  className="toggle-password-icon"
+                  onClick={handleTogglePasswordVisibility}
+                />
+              ) : (
+                <FaEye
+                  className="toggle-password-icon"
+                  onClick={handleTogglePasswordVisibility}
+                />
+              )}
+            </div>
           </div>
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="signup-button">

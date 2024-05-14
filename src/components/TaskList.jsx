@@ -38,8 +38,8 @@ const TaskList = () => {
   const [userName, setUserName] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortedTasks, setSortedTasks] = useState([]);
-  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order is ascending
-  const [activeSort, setActiveSort] = useState(null); // State to track active sort button
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [activeSort, setActiveSort] = useState(null);
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");

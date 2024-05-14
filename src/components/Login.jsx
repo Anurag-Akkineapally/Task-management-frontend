@@ -1,13 +1,15 @@
 // components/Login.js
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./Login.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to track password visibility
 
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -48,6 +50,10 @@ function Login() {
     return <Redirect to="/tasklist" />;
   }
 
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSignupRedirect = () => {
     setTimeout(() => {
       window.location.href = "/signup";
@@ -72,14 +78,28 @@ function Login() {
           </div>
           <div className="input-group">
             <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              {/* Toggle password visibility button */}
+              {showPassword ? (
+                <FaEyeSlash
+                  className="toggle-password-icon"
+                  onClick={handleTogglePasswordVisibility}
+                />
+              ) : (
+                <FaEye
+                  className="toggle-password-icon"
+                  onClick={handleTogglePasswordVisibility}
+                />
+              )}
+            </div>
           </div>
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="login-button">

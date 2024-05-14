@@ -72,3 +72,24 @@
 .create-new-link .signup-link:hover {
   text-decoration: underline;
 }
+/* Login.css */
+.input-group {
+  position: relative;
+  margin-bottom: 1rem; /* Adjust as needed */
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 40px; /* Adjust according to the width of the eye button */
+}
+
+.toggle-password-icon {
+  position: absolute;
+  right: 10px; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

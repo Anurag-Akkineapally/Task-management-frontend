@@ -22,7 +22,7 @@ const TaskForm = ({ userId, onFormSubmit }) => {
       className="task-form"
     >
       <Row gutter={20}>
-        <Col xs={24} sm={24} md={20} lg={22} xl={20}>
+        <Col xs={17} sm={18} md={13} lg={15} xl={13}>
           <Form.Item
             name="title"
             rules={[{ required: true, message: "Please enter a task title." }]}
