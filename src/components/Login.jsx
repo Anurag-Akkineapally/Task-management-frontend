@@ -1,39 +1,37 @@
 // components/Login.js
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
 import "./Login.css";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State to track password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
+  const onSubmit = async (data) => {
     try {
       const response = await fetch("http://localhost:5179/User/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(data),
       });
 
-      // Check if response is successful (status 200)
       if (response.ok) {
-        const data = await response.json();
-        const userId = data.userId;
-        const userName = data.userName;
-        const token = data.token;
-        const email = data.userEmail;
+        const responseData = await response.json();
+        const { userId, userName, token, userEmail } = responseData;
         localStorage.setItem("userId", userId);
         localStorage.setItem("userName", userName);
         localStorage.setItem("jwtToken", token);
-        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userEmail", userEmail);
         setLoggedIn(true);
       } else {
         setError("Invalid email or password.");
@@ -57,13 +55,13 @@ function Login() {
   const handleSignupRedirect = () => {
     setTimeout(() => {
       window.location.href = "/signup";
-    }, 0.00001); // Redirect after 1 second
+    }, 0.00001);
   };
 
   return (
     <div className="login-page">
       <div className="login-container">
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h2>Login</h2>
           <div className="input-group">
             <label htmlFor="email">Email:</label>
@@ -71,10 +69,11 @@ function Login() {
               type="email"
               id="email"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              {...register("email", { required: "Email is required" })}
             />
+            {errors.email && (
+              <p className="error-message">{errors.email.message}</p>
+            )}
           </div>
           <div className="input-group">
             <label htmlFor="password">Password:</label>
@@ -83,11 +82,11 @@ function Login() {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                {...register("password", { required: "Password is required" })}
               />
-              {/* Toggle password visibility button */}
+              {errors.password && (
+                <p className="error-message">{errors.password.message}</p>
+              )}
               {showPassword ? (
                 <FaEyeSlash
                   className="toggle-password-icon"

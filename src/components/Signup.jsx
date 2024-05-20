@@ -1,31 +1,30 @@
-// components/Signup.js
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
 import "./Signup.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import { message } from "antd";
 
 function Signup() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [signedUp, setSignedUp] = useState(false);
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State to track password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSignup = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
+  const onSubmit = async (data) => {
     try {
       const response = await fetch("http://localhost:5179/User/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify(data),
       });
 
-      // Check if response is successful (status 200)
       if (response.ok) {
         setSignedUp(true);
         message.info(
@@ -55,7 +54,7 @@ function Signup() {
   return (
     <div className="signup-page">
       <div className="signup-container">
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h2>Sign Up</h2>
           <div className="input-group">
             <label htmlFor="username">Username:</label>
@@ -63,10 +62,11 @@ function Signup() {
               type="text"
               id="username"
               placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              {...register("username", { required: "Username is required" })}
             />
+            {errors.username && (
+              <p className="error-message">{errors.username.message}</p>
+            )}
           </div>
           <div className="input-group">
             <label htmlFor="email">Email:</label>
@@ -74,10 +74,11 @@ function Signup() {
               type="email"
               id="email"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              {...register("email", { required: "Email is required" })}
             />
+            {errors.email && (
+              <p className="error-message">{errors.email.message}</p>
+            )}
           </div>
           <div className="input-group">
             <label htmlFor="password">Password:</label>
@@ -86,11 +87,11 @@ function Signup() {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                {...register("password", { required: "Password is required" })}
               />
-              {/* Toggle password visibility button */}
+              {errors.password && (
+                <p className="error-message">{errors.password.message}</p>
+              )}
               {showPassword ? (
                 <FaEyeSlash
                   className="toggle-password-icon"
