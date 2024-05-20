@@ -16,6 +16,7 @@ import {
   EllipsisOutlined,
   UserOutlined,
   DownOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import TaskTab from "./TaskTab";
 import TaskForm from "./TaskForm";
@@ -205,6 +206,11 @@ const TaskList = () => {
                   onChange={(e) => setSearchKeyword(e.target.value)}
                   value={searchKeyword}
                   autoFocus
+                  prefix={
+                    <SearchOutlined
+                      style={{ color: "rgba(0,0,0,.25)", paddingRight: "6px" }}
+                    />
+                  }
                   addonAfter={
                     searchKeyword && (
                       <Button type="link" onClick={clearSearch}>
