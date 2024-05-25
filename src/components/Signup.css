@@ -1,4 +1,3 @@
-/* components/Signup.css */
 .signup-page {
   display: flex;
   justify-content: center;
@@ -23,6 +22,7 @@
 
 .input-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .input-group label {
@@ -36,6 +36,7 @@
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .error-message {
@@ -71,4 +72,24 @@
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 40px;
+}
+
+.toggle-password-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
