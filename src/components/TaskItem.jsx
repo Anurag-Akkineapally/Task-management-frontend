@@ -62,9 +62,7 @@ const TaskItem = ({ task, onTaskRemoval, onTaskToggle, onTaskUpdate }) => {
       key={task.id}
     >
       <div className="task-item" style={{ fontSize: "17px" }}>
-        {/* <Tag color={task.completed ? "cyan" : "red"} className="task-tag"> */}
         {task.title}
-        {/* </Tag> */}
       </div>
 
       {/* Edit Modal */}

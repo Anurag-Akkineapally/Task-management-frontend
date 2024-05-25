@@ -5,30 +5,28 @@
   background-color: white;
 }
 .tab-spacing .ant-tabs-tab {
-  margin-right: 70px; /* Consistent spacing between tabs */
-  margin-left: 20px; /* Consistent spacing for adjacent tabs */
+  margin-right: 70px;
+  margin-left: 20px;
 }
 
 .ant-tabs-tab + .ant-tabs-tab {
-  margin-left: 20px; /* Ensures uniform spacing between adjacent tabs */
+  margin-left: 20px;
 }
 
-/* Increase gap between specific tabs */
 .tab-spacing .ant-tabs-tab:nth-child(2) {
-  margin-right: 50px; /* Increase gap between "Active" and "Completed" */
+  margin-right: 50px;
 }
 .tab-spacing .ant-tabs-tab:nth-child(1) {
-  margin-right: 50px; /* Increase gap between "Active" and "Completed" */
+  margin-right: 50px;
 }
 
 .ant-tabs-tab:hover {
-  color: #1890ff; /* Default hover color for Ant Design tabs */
+  color: #1890ff;
 }
-/* Custom spacing between action buttons */
 .toggle-status {
-  margin-right: 30px; /* Adjust the horizontal gap between Toggle and Edit/Delete */
+  margin-right: 30px;
 }
 
 .edit-button {
-  margin-right: 30px; /* Adjust the horizontal gap between Edit and Delete */
+  margin-right: 30px;
 }
